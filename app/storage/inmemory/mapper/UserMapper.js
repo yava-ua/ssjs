@@ -1,4 +1,4 @@
-const User = require('../../domain/User');
+const User = require('../model/User');
 class UserMapper {
     constructor() {
         this.className = User.name;

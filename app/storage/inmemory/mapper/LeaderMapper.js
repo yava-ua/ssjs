@@ -1,4 +1,4 @@
-const Leader = require('../../domain/Leader');
+const Leader = require('../model/Leader');
 class LeaderMapper {
     constructor() {
         this.className = Leader.name;
