@@ -1,4 +1,4 @@
-var app = require('../app/app');
+var app = require('../app/appServer');
 var debug = require('debug')('ServerSideJS:server');
 var http = require('http');
 
@@ -53,8 +53,8 @@ function onError(error) {
 
 function onListening() {
     var addr = server.address();
-    var bind = typeof addr === 'string'
-        ? 'pipe ' + addr
-        : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    var bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+    debug(`appServer running. Listening on  ${bind}`);
 }
+
+module.exports = server;

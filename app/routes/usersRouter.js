@@ -2,20 +2,19 @@ const debug = require('debug')('ServerSideJS:routes:user');
 const express = require('express');
 const router = express.Router();
 
-const UserMapper = require('../service/mapper/UserMapper');
-const RouterManager = require('./RouteManager');
-
+const RouterPromiseManager = require('./RoutePromiseManager');
 const CrudService = require('../service/CrudService');
-const SimpleEntityProvider = require('../service/SimpleEntityProvider');
+const MongooseProvider = require('../storage/mongodb/MongooseProvider');
+const UserMapper = require('../storage/mongodb/mapper/UserMapper');
 
-const userCrudService = new CrudService(new SimpleEntityProvider(new UserMapper()));
-const userRouter = new RouterManager(userCrudService);
+const userCrudService = new CrudService(new MongooseProvider(new UserMapper()));
+const userRouter = new RouterPromiseManager(userCrudService);
 
 router.get('/', userRouter.handleReadAll.bind(userRouter))
     .post('/', userRouter.handleCreateEntity.bind(userRouter))
     .delete('/', userRouter.handleDeleteAll.bind(userRouter))
-    .get('/:userId', (req, res, next) => userRouter.handleReadEntity(req.params.userId, req, res, next).bind(userRouter))
-    .put('/:userId', (req, res, next) => userRouter.handleUpdateEntity(req.params.userId, req, res, next).bind(userRouter))
-    .delete('/:userId', (req, res, next) =>  userRouter.handleDeleteEntity(req.params.userId, req, res, next).bind(userRouter));
+    .get('/:userId', (req, res, next) => userRouter.handleReadEntity(req.params.userId, req, res, next))
+    .put('/:userId', (req, res, next) => userRouter.handleUpdateEntity(req.params.userId, req, res, next))
+    .delete('/:userId', (req, res, next) =>  userRouter.handleDeleteEntity(req.params.userId, req, res, next));
 
 module.exports = router;

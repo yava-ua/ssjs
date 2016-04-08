@@ -1,5 +1,5 @@
 const assert = require('assert');
-const User = require('../../../domain/User');
+const User = require('../../model/User');
 const UserMapper = require('../UserMapper');
 
 var userMapper = new UserMapper();

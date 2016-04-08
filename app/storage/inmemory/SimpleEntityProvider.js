@@ -1,4 +1,4 @@
-const storage = require('../storage/storage');
+const storage = require('./storage');
 
 class SimpleEntityProvider {
     constructor(concreteMapper) {

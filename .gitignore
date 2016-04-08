@@ -1,5 +1,5 @@
 .idea/
-node_modules
-db/
+node_modules/
+mongodb/
 ServerSideJS.iml
 npm-debug.log*
