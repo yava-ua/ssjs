@@ -5,8 +5,8 @@
   "author": "Yaroslav Boychuk",
   "private": true,
   "scripts": {
-    "mongo": "set DEBUG=ServerSideJS:* && node --use-strict --harmony --harmony-default-parameters ./app/mongodb/MongoTest",
-    "start": "set DEBUG=ServerSideJS:* && node --use-strict --harmony --harmony-default-parameters ./bin/main.js",
+    "mongo": "set DEBUG=ServerSideJS:* && node --use-strict --harmony --harmony-default-parameters --harmony_destructuring ./app/mongodb/MongoTest",
+    "start": "set DEBUG=ServerSideJS:* && node --use-strict --harmony --harmony-default-parameters --harmony_destructuring ./bin/main.js",
     "test": "set DEBUG=ServerSideJS:* && mocha --compilers js:babel-core/register app/**/spec/*.spec.js"
   },
   "repository": {

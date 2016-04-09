@@ -18,8 +18,8 @@ router.use(bodyParser.urlencoded({extended: false}));
 router.get('/', (req, res, next) => leaderRouter.handleReadAll)
     .post('/', (req, res, next) => leaderRouter.handleCreateEntity)
     .delete('/', (req, res, next) => leaderRouter.handleDeleteAll)
-    .get('/:leaderId', (req, res, next) => leaderRouter.handleReadEntity(req.params.userId, req, res, next).bind(leaderRouter))
-    .put('/:leaderId', (req, res, next) => leaderRouter.handleUpdateEntity(req.params.userId, req, res, next).bind(leaderRouter))
-    .delete('/:leaderId', (req, res, next) =>  leaderRouter.handleDeleteEntity(req.params.userId, req, res, next).bind(leaderRouter));
+    .get('/:leaderId', (req, res, next) => leaderRouter.handleReadEntity(req.params.leaderId, req, res, next).bind(leaderRouter))
+    .put('/:leaderId', (req, res, next) => leaderRouter.handleUpdateEntity(req.params.leaderId, req, res, next).bind(leaderRouter))
+    .delete('/:leaderId', (req, res, next) =>  leaderRouter.handleDeleteEntity(req.params.leaderId, req, res, next).bind(leaderRouter));
 
 module.exports = router;

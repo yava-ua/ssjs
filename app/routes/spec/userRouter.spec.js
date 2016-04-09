@@ -8,6 +8,7 @@ describe('Users router test', function () {
         request(testApp.server)
             .post('/users')
             .send({firstName: 'Yaroslav', lastName: 'Boychuk'})
+            .auth('admin', 'password')
             .expect(200)
             .end(function(err, res){
                 var result = res.body;
