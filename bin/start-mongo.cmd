@@ -1,4 +1,3 @@
-cd ../
-rd mongodb
-mkdir mongodb
+#rd mongodb
+#mkdir mongodb
 mongod --dbpath ./mongodb
