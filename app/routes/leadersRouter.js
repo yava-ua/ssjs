@@ -1,5 +1,6 @@
 const debug = require('debug')('ServerSideJS:routes:user');
 const express = require('express');
+const bodyParser = require('body-parser');
 const router = express.Router();
 
 const LeaderMapper = require('../storage/inmemory/mapper/LeaderMapper');
@@ -10,6 +11,9 @@ const SimpleEntityProvider = require('../storage/inmemory/SimpleEntityProvider')
 
 const leaderCrudService = new CrudService(new SimpleEntityProvider(new LeaderMapper()));
 const leaderRouter = new RouterManager(leaderCrudService);
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/', (req, res, next) => leaderRouter.handleReadAll)
     .post('/', (req, res, next) => leaderRouter.handleCreateEntity)

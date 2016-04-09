@@ -1,5 +1,6 @@
 const debug = require('debug')('ServerSideJS:routes:user');
 const express = require('express');
+const bodyParser = require('body-parser');
 const router = express.Router();
 
 const RouterPromiseManager = require('./RoutePromiseManager');
@@ -9,6 +10,9 @@ const UserMapper = require('../storage/mongodb/mapper/UserMapper');
 
 const userCrudService = new CrudService(new MongooseProvider(new UserMapper()));
 const userRouter = new RouterPromiseManager(userCrudService);
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({extended: false}));
 
 router.get('/', userRouter.handleReadAll.bind(userRouter))
     .post('/', userRouter.handleCreateEntity.bind(userRouter))
