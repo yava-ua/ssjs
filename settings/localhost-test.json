@@ -5,6 +5,6 @@
     "instance": "ssjs"
   },
   "appServer": {
-    "port": 3000
+    "port": 6000
   }
 }
