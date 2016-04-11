@@ -1,3 +1,5 @@
+const configLoader = require("../settings/configLoader");
+
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -8,6 +10,7 @@ const rootRouter = require('./routes/rootRouter');
 const usersRouter = require('./routes/usersRouter');
 const leadersRouter = require('./routes/leadersRouter');
 
+const config = configLoader.getConfig().appServer;
 const app = express();
 
 // view engine setup
@@ -16,7 +19,7 @@ app.set('view engine', 'jade');
 
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(cookieParser());
+app.use(cookieParser(config.secureKey));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', rootRouter);

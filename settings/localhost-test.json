@@ -5,6 +5,7 @@
     "instance": "ssjs"
   },
   "appServer": {
-    "port": 6000
+    "port": 6000,
+    "secureKey": "qld0-2lc4-mgls-ld3o"
   }
 }

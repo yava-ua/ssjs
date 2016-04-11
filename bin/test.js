@@ -1,12 +1,11 @@
 const debug = require('debug')('ServerSideJS:main');
-const appServer = require('./www');
-const config = require("../settings/localhost-test.json");
-const mongooseClient = require('../app/storage/mongodb/mongooseClient');
+const configLoader = require("../settings/configLoader");
+configLoader.loadConfig(require("../settings/localhost-test.json"));
 
-var server = appServer.start(config.appServer);
-var db = mongooseClient.start(config.db);
+const appServer = require('./www').server;
+const mongooseClient = require('../app/storage/mongodb/mongooseClient').db;
 
 debug('Test application started');
 
-exports.server = server;
-exports.db = db;
+exports.server = appServer;
+exports.db = mongooseClient;
