@@ -2,17 +2,30 @@ const configLoader = require("../settings/configLoader");
 const config = configLoader.getConfig().appServer;
 var app = require('../app/appServer');
 var debug = require('debug')('ServerSideJS:server');
-var http = require('http');
-var server = http.createServer(app);
 
-var port = config.port;
-app.set('port', port);
+const path = require('path');
+const fs = require('fs');
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+const privateKey = fs.readFileSync(path.join(__dirname, '../app/certificate/local-mock.key'));
+const certificate = fs.readFileSync(path.join(__dirname, '../app/certificate/local-mock.cer'));
+const credentials = {key: privateKey, cert: certificate};
 
-function onError(error) {
+
+const httpsServer = require('https').createServer(credentials, app);
+const httpServer = require('http').createServer(app);
+
+app.set('port', config.port);
+
+httpsServer.listen(config.secPort);
+httpsServer.on('error', (err) => onError(err, config.secPort));
+httpsServer.on('listening', () => onListening(httpsServer));
+
+httpServer.listen(config.port);
+httpServer.on('error', (err) => onError(err, config.port));
+httpServer.on('listening', () => onListening(httpServer));
+
+
+function onError(error, port) {
     if (error.syscall !== 'listen') {
         throw error;
     }
@@ -31,9 +44,9 @@ function onError(error) {
     }
 }
 
-function onListening() {
+function onListening(server) {
     debug(`appServer running. Listening on port ${server.address().port}`);
 
 }
 
-exports.server = server;
+exports.server = app;

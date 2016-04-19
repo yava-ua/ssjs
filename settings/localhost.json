@@ -6,6 +6,7 @@
   },
   "appServer": {
     "port": 3000,
+    "secPort": 3443,
     "secureKey": "qld0-2lc4-mgls-ld3o"
   }
 }

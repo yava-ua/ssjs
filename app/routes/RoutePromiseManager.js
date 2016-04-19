@@ -1,4 +1,4 @@
-const Response = require('./Response');
+const Response = require('./model/Response');
 const debug = require('debug')('ServerSideJS:routes:RouteManager');
 
 function handlePromise(promise, req, res, next) {
