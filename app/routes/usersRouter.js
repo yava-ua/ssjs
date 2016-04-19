@@ -7,7 +7,7 @@ const Response = require('./model/Response');
 
 const router = express.Router();
 
-const Authenticator = require('./auth/Authenticator');
+const Authenticator = require('./auth/authenticator');
 const RouterPromiseManager = require('./RoutePromiseManager');
 const userService = require('../service/UserService');
 

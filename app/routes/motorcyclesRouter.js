@@ -2,7 +2,7 @@ const debug = require('debug')('ServerSideJS:routes:user');
 const express = require('express');
 const router = express.Router();
 
-const Authenticator = require('./auth/Authenticator');
+const Authenticator = require('./auth/authenticator');
 const Response = require('./model/Response');
 const RouterPromiseManager = require('./RoutePromiseManager');
 const motorcycleService = require('../service/MotorcycleService');
