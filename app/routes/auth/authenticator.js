@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const UserService = require('../../service/UserService');
 
 class Authenticator {
+
     static getToken(user) {
         return jwt.sign(
             {
@@ -15,7 +16,6 @@ class Authenticator {
                 expiresIn: 3600
             });
     }
-
 
     static authenticationMiddleware(req, res, next) {
         var token = req.body.token || req.headers['x-access-token'];
